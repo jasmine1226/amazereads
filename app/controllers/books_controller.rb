@@ -4,15 +4,25 @@ class BooksController < Sinatra::Base
 
   configure do
     set :public_folder, 'public'
-    set :views, 'app/views'
+    set :views, 'app/views/books'
   end
 
   get '/books' do
-    erb :books
+    erb :index
+  end
+
+  get '/books/new' do
+    erb :new
   end
 
   post '/books/new' do
-    erb :new_book
+    @book = Book.create(params)
+    redirect "/books/#{@book.id}"
+  end
+
+  get '/books/:id' do
+    @book = Book.find_by(:id => params[:id])
+    erb :show
   end
 
 end
