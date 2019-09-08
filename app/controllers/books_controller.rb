@@ -8,6 +8,7 @@ class BooksController < Sinatra::Base
   end
 
   get '/books' do
+    @books = Book.all
     erb :index
   end
 
