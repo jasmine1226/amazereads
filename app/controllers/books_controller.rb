@@ -7,4 +7,12 @@ class BooksController < Sinatra::Base
     set :views, 'app/views'
   end
 
+  get '/books' do
+    erb :books
+  end
+
+  post '/books/new' do
+    erb :new_book
+  end
+
 end

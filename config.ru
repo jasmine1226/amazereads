@@ -1,6 +1,6 @@
 require './config/environment'
 
-require_relative 'app/controllers/applications_controller'
+require_relative 'app/controllers/application_controller'
 require_relative 'app/controllers/users_controller'
 require_relative 'app/controllers/books_controller'
 
