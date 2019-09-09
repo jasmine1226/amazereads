@@ -5,6 +5,7 @@ class BooksController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views/books'
+    enable :sessions
   end
 
   get '/books' do
