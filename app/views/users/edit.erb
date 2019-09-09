@@ -1,0 +1,16 @@
+<form action="/<%@user.id%>/edit" method="post">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    <p>
+        <lable for="email">email:</label>
+        <input type="text" name="email" />
+    </p>
+    <p>
+        <lable for="usrename">username:</label>
+        <input type="text" name="username" />
+    </p>
+    <p>
+        <lable for="password">password:</label>
+        <input type="text" name="password" />
+    </p>
+    <input type="submit" value="Register">
+</form>

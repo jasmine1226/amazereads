@@ -1,12 +1,10 @@
 require './config/environment'
 
-class UsersController < Sinatra::Base
+class UsersController < ApplicationController
 
   configure do
     set :public_folder, 'public'
     set :views, 'app/views/users'
-    enable :sessions
-    set :session_secret, ENV["SESSION_SECRET"]
   end
 
   post '/login' do
@@ -15,47 +13,46 @@ class UsersController < Sinatra::Base
       session[:user_id] = user.id
       redirect "/users/#{user.id}"
     end
-      redirect '/failure'
-  end
-
-  get '/failure' do
-    erb :failure
+      erb :failure
   end
 
   get '/register' do
     erb :new
   end
-  
+
   post '/register' do
-    user = User.new(params)
+    user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
     if user.save
-      redirect "/users/#{@user.id}"
+      redirect "/users/#{user.id}"
     end
-      redirect "/"
+      erb :failure
     end
 
   get "/users/:id" do
-    @user = User.find_by(:id => params[:id])
-    erb :feed
+    @current_user = User.find_by(:id => session[:user_id])
+    if @current_user
+      erb :profile
+    else
+      erb :failure
+    end
   end
 
-  get "/users/:id/profile" do
+  get "/users/:id/edit" do
     @user = User.find_by(:id => params[:id])
+    erb :edit
+  end
+
+  patch "/users/:id/edit" do
+    @user = User.find_by(:id => params[:id])
+    @user.username = params[:username]
+    @user.email = params[:email]
+    @user.password = params[:password]
     erb :profile
   end
 
-  post '/logout' do
+  get '/logout' do
     session.clear
     redirect '/'
   end
 
-  helpers do
-    def logged_in?
-      !!session[:user_id]
-    end
-
-    def current_user
-      User.find(session[:user_id])
-    end
-  end 
 end

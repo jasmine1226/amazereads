@@ -1,11 +1,10 @@
 require './config/environment'
 
-class BooksController < Sinatra::Base
+class BooksController < ApplicationController
 
   configure do
     set :public_folder, 'public'
     set :views, 'app/views/books'
-    enable :sessions
   end
 
   get '/books' do
