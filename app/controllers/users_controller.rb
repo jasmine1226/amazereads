@@ -2,22 +2,18 @@ require './config/environment'
 
 class UsersController < ApplicationController
 
-  configure do
-    set :public_folder, 'public'
-    set :views, 'app/views/users'
-  end
-
   post '/login' do
-    user = User.find_by(:username => params[:username])
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect "/users/#{user.id}"
+    @user = User.find_by(:username => params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect "/users/#{@user.id}"
+    else
+      erb :'/users/failure'
     end
-      erb :failure
   end
 
   get '/register' do
-    erb :new
+    erb :'/users/new'
   end
 
   post '/register' do
@@ -25,21 +21,21 @@ class UsersController < ApplicationController
     if user.save
       redirect "/users/#{user.id}"
     end
-      erb :failure
+      erb :'/users/failure'
     end
 
   get "/users/:id" do
-    @current_user = User.find_by(:id => session[:user_id])
-    if @current_user
-      erb :profile
-    else
-      erb :failure
-    end
+    @user = User.find_by(:id => params[:id])
+    erb :'/users/profile'
   end
 
-  get "/users/:id/edit" do
-    @user = User.find_by(:id => params[:id])
-    erb :edit
+  get "/users/:id/edit" do  
+    if logged_in? && current_user.id == params[:id].to_i
+        @user = User.find_by(:id => params[:id])
+        erb :'/users/edit'
+    else
+      erb :'/users/error'
+    end
   end
 
   patch "/users/:id/edit" do
@@ -47,7 +43,8 @@ class UsersController < ApplicationController
     @user.username = params[:username]
     @user.email = params[:email]
     @user.password = params[:password]
-    erb :profile
+    @user.save
+    erb :'/users/profile'
   end
 
   get '/logout' do

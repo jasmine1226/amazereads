@@ -1,10 +1,8 @@
-<% if UsersController.helper.logged_in?
+<p>welcome back, <%= @user.username %></p>
 
-<p>welcome back, <%=@user.username%></p>
+<h2>recent reviews</h2>
 
-<h2>my reviews</h2>
+<h2>bookshelf</h2>
 
-<h2>my bookshelf</h2>
-
-<a href="/users/<%@user.id%>/edit">update</a>
+<a href="/users/<%= @user.id %>/edit">update</a>
 <a href="/logout">log out</a>
