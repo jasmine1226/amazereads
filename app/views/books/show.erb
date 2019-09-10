@@ -5,3 +5,8 @@
 <h3>genre: <%=@book.genre%></h3>
 <h3>description:</h3>
 <p><%=@book.description%></p>
+
+
+<a href="/books/<%= @book.id %>/reviews">see reviews</a>
+<a href="/books/<%= @book.id %>/reviews/new">leave a review</a>
+<a href="/books">back</a>

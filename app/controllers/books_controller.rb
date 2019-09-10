@@ -1,5 +1,3 @@
-require './config/environment'
-
 class BooksController < ApplicationController
 
   get '/books' do
@@ -17,7 +15,7 @@ class BooksController < ApplicationController
   end
 
   get '/books/:id' do
-    @book = Book.find_by(:id => params[:id])
+    @book = Book.find_by_id(params[:id])
     erb :'/books/show'
   end
 
