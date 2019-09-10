@@ -10,8 +10,10 @@
     <title>Amazereads</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     <link rel="stylesheet" href="/stylesheets/main.css" />
+    
   </head>
   <body>
     <div class="wrapper container-fluid">
@@ -25,13 +27,13 @@
             <li><a href="/books">Books</a></li>
             <% if logged_in? %>
               <li><a href="/">My Bookshelf</a></li>
-              <li><a href="/">My Reviews</a></li>
+              <li><a href="/users/<%= session[:user_id] %>/reviews">My Reviews</a></li>
             <% end %>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if !logged_in? %>
               <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-              <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
             <% else %>
               <li><a href="/users/<%= session[:user_id] %>/edit"><span class="glyphicon glyphicon-pencil"></span>Account</a></li>
               <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>

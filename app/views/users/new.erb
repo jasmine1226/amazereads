@@ -1,15 +1,18 @@
-<form action="/register" method="post">
-    <p>
-        <lable for="email">email:</label>
-        <input type="text" name="email" />
-    </p>
-    <p>
-        <lable for="usrename">username:</label>
-        <input type="text" name="username" />
-    </p>
-    <p>
-        <lable for="password">password:</label>
-        <input type="password" name="password" />
-    </p>
-    <input type="submit" value="Register">
-</form>
+<h1>create a new account</h1>
+<div class="form-group"> 
+    <form action="/register" method="post">
+        <p>
+            <lable for="email">Email:</label>
+            <input type="text" class="form-control" name="email" />
+        </p>
+        <p>
+            <lable for="usrename">Username:</label>
+            <input type="text" class="form-control" name="username" />
+        </p>
+        <p>
+            <lable for="password">Password:</label>
+            <input type="password" class="form-control" name="password" />
+        </p>
+        <input type="submit" class="btn btn-default" value="register">
+    </form>
+</div>

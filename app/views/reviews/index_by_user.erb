@@ -1,0 +1,20 @@
+<h1>Reviews by <%= @user.username %></h1>
+
+<br><br>
+<div class="table-responsive">
+    <table class="table-hover" style="width:100%">
+    <tr>
+        <th>Book</th>
+        <th>Rating</th>
+        <th>Content</th>
+    </tr>
+        <% @reviews.each do |review| %>
+            <tr>
+                <td><a href="/books/<%= review.book_id %>"><%= Book.find_by_id(review.book_id).title %></a></td>
+                <td><%=review.rating%></td>
+                <td><%=review.content%></td>
+            </tr>
+        <% end %>
+    </table>
+</div><br><br>
+<a href="/users/<%= @user.id %>" class="btn btn-default">Back</a>

@@ -1,12 +1,10 @@
-<h1>Book page</h1>
-
 <h2><%=@book.title%></h2>
-<h3>author: <%=@book.author%></h3>
-<h3>genre: <%=@book.genre%></h3>
-<h3>description:</h3>
+<b><p>by <%=@book.author%></p>
+<p>Genre: <%=@book.genre%></p></b>
 <p><%=@book.description%></p>
 
-
-<a href="/books/<%= @book.id %>/reviews">see reviews</a>
-<a href="/books/<%= @book.id %>/reviews/new">leave a review</a>
-<a href="/books">back</a>
+<div class="btn-group">
+    <a href="/books/<%= @book.id %>/reviews" class="btn btn-default">All Reviews</a>
+    <a href="/books/<%= @book.id %>/reviews/new" class="btn btn-default">Add a Review</a>
+    <a href="/books" class="btn btn-default">Back</a>
+</div>

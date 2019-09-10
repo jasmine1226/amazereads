@@ -1,7 +1,10 @@
 
 <% if logged_in? && session[:user_id] == @user.id %>
-    <p>good to see you here, <%= @user.username %></p>
+    <p>Welcome back, <%= @user.username %></p>
 <% end %>
-<h2>recent reviews</h2>
+    <p>Username: <%= @user.username %></p>
+    <p>Email: <%= @user.email %></p>
 
-<h2>bookshelf</h2>
+<h2>Recent Reviews</h2>
+
+<h2>Bookshelf</h2>

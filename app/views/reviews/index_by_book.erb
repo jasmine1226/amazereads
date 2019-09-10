@@ -1,0 +1,19 @@
+<h1>Reviews of <%= @book.title %></h1>
+<b><p>by <%=@book.author%></p></b>
+
+<br><br>
+<div class="table-responsive">
+    <table class="table-hover" style="width:100%">
+    <tr>        
+        <th>Rating</th>
+        <th>Content</th>
+    </tr>
+        <% @reviews.each do |review| %>
+            <tr>
+                <td><%=review.rating%></td>
+                <td><%=review.content%></td>      
+            </tr>
+        <% end %>
+    </table>
+</div><br><br>
+<a href="/books/<%= @book.id %>" class="btn btn-default">back</a>

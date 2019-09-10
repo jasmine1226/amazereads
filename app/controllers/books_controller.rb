@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
 
   get '/books' do
-    @books = Book.all
+    @books = Book.all.order('title ASC')
     erb :'/books/index'
   end
 

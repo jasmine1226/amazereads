@@ -1,13 +1,15 @@
-<h2>Creating a review for <%= @book.title %></h2>
+<h2>Creating a Review for <%= @book.title %></h2>
 
-<form action="/books/<%= @book.id %>/reviews/new" method="post">
-    <p>
-        <lable for="content">review:</label>
-        <textarea type="text" name="content"></textarea>
-    </p>
-    <p>
-        <lable for="rating">rating:</label>
-        <input type="range" name="rating" min="1" max="5"/>
-    </p>
-    <input type="submit" value="Submit">
-</form>
+<div class="form-group"> 
+    <form action="/books/<%= @book.id %>/reviews/new" method="post">
+        <p>
+            <lable for="content">Review:</label>
+            <textarea type="text" class="form-control" name="content"></textarea>
+        </p>
+        <p>
+            <lable for="rating">Rating:</label>
+            <input type="range" class="form-control" name="rating" min="1" max="5"/>
+        </p>
+        <input type="submit" class="btn btn-default" value="Submit">
+    </form>
+</div>

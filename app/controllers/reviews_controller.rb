@@ -18,13 +18,18 @@ class ReviewsController < ApplicationController
         redirect "/reviews/#{@review.id}"
     end
 
-    
     get "/books/:id/reviews" do
         @book = Book.find_by_id(params[:id])
         @reviews = @book.reviews
-        erb :'reviews/index'
+        erb :'reviews/index_by_book'
     end
   
+    get "/users/:id/reviews" do
+        @user = User.find_by_id(params[:id])
+        @reviews = @user.reviews
+        erb :'reviews/index_by_user'
+    end
+
     get "/reviews/:id" do
         @review = Review.find_by(:id => params[:id])
         @book = Book.find_by_id(@review[:book_id])
