@@ -5,8 +5,8 @@
 
 <div class="btn-group">
     <a href="/books/<%= @book.id %>/reviews" class="btn btn-default">All Reviews</a>    
-    <% if logged_in? && session[:user_id] == @user.id %>
-        <a href="/books/<%= @book.id %>/reviews/new" class="btn btn-default">Add a Review</a>
+    <% if logged_in? %>
+        <a href="/reviews/new/<%= @book.id %>" class="btn btn-default">Add a Review</a>
     <% end %>
     <a href="/books" class="btn btn-default">Back</a>
 </div>

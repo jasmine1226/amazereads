@@ -1,7 +1,7 @@
 <h2>Creating a Review for <%= @book.title %></h2>
 
 <div class="form-group"> 
-    <form action="/books/<%= @book.id %>/reviews/new" method="post">
+    <form action="/reviews/new/<%= @book.id %>" method="post">
         <p>
             <lable for="content">Review:</label>
             <textarea type="text" class="form-control" name="content"></textarea>
@@ -13,3 +13,5 @@
         <input type="submit" class="btn btn-default" value="Submit">
     </form>
 </div>
+<br><br>
+<button class="btn btn-default" onclick="history.back()">Back</button>
