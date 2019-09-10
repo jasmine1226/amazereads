@@ -5,7 +5,7 @@ class ReviewsController < ApplicationController
             @book = Book.find_by_id(params[:id])
             erb :'reviews/new'
         else
-            redirect '/'
+            redirect '/error'
         end
     end
                 
@@ -16,6 +16,24 @@ class ReviewsController < ApplicationController
         @book.reviews.push(@review)
         @user.reviews.push(@review)
         redirect "/reviews/#{@review.id}"
+    end
+
+    get "/reviews/:id/edit" do
+        @review = Review.find_by_id(params[:id])
+        if logged_in? && session[:user_id] == @review.user_id
+            @book = Book.find_by_id(@review.book_id)
+            erb :'/reviews/edit'
+        else
+            redirect '/error'
+        end
+    end
+
+    patch "/reviews/:id/edit" do
+        @review = Review.find_by_id(params[:id])        
+        @review.content = params[:content]
+        @review.rating = params[:rating]
+        @review.save
+        redirect "/reviews/#{@review.id}"            
     end
 
     get "/books/:id/reviews" do
@@ -38,8 +56,12 @@ class ReviewsController < ApplicationController
   
     delete "/reviews/:id/delete" do
         @review = Review.find_by(:id => params[:id])
-        @book = Book.find_by_id(@review[:book_id])
-        @review.destroy
-        redirect "/books/#{@book.id}/reviews"
+        if logged_in? && session[:user_id] == @review.user_id
+            @book = Book.find_by_id(@review[:book_id])
+            @review.destroy
+            redirect "/books/#{@book.id}/reviews"
+        else
+            redirect '/error'
+        end
     end
   end

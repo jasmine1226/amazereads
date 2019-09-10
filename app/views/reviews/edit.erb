@@ -1,0 +1,16 @@
+<h2>Updating Your Review for <%= @book.title %></h2>
+
+<div class="form-group"> 
+    <form action="/reviews/<%= @review.id %>/edit" method="post">    
+        <input id="hidden" type="hidden" name="_method" value="patch">
+        <p>
+            <lable for="content">Review:</label>
+            <textarea type="text" class="form-control" name="content" ><%= @review.content %></textarea>
+        </p>
+        <p>
+            <lable for="rating">Rating:</label>
+            <input type="range" class="form-control" name="rating" value="<%= @review.rating %>" min="1" max="5"/>
+        </p>
+        <input type="submit" class="btn btn-default" value="Update">
+    </form>
+</div>
