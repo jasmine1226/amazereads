@@ -21,13 +21,21 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = @user.id
       redirect "/users/#{@user.id}"
     else
-      erb :failure
+      redirect '/failure'
     end
   end
 
   get '/logout' do
     session.clear
     redirect '/'
+  end
+
+  get '/failure' do
+    erb :failure
+  end
+
+  get '/error' do
+    erb :error
   end
 
   helpers do

@@ -1,8 +1,7 @@
-<p>welcome back, <%= @user.username %></p>
 
+<% if logged_in? && session[:user_id] == @user.id %>
+    <p>good to see you here, <%= @user.username %></p>
+<% end %>
 <h2>recent reviews</h2>
 
 <h2>bookshelf</h2>
-
-<a href="/users/<%= @user.id %>/edit">update</a>
-<a href="/logout">log out</a>

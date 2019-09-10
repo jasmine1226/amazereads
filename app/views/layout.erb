@@ -21,15 +21,20 @@
             <a class="navbar-brand" href="/">amazereads</a>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="/">Home</a></li>
             <li><a href="/books">Books</a></li>
+            <% if logged_in? %>
+              <li><a href="/">My Bookshelf</a></li>
+              <li><a href="/">My Reviews</a></li>
+            <% end %>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if !logged_in? %>
               <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
               <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             <% else %>
-              <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+              <li><a href="/users/<%= session[:user_id] %>/edit"><span class="glyphicon glyphicon-pencil"></span>Account</a></li>
+              <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
             <% end %>
           </ul>
         </div>

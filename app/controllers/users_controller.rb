@@ -22,7 +22,7 @@ class UsersController < ApplicationController
         @user = User.find_by(:id => params[:id])
         erb :'/users/edit'
     else
-      erb :'/users/error'
+      redirect '/error'
     end
   end
 
@@ -35,4 +35,9 @@ class UsersController < ApplicationController
     erb :'/users/profile'
   end
 
+  delete "/users/:id/delete" do
+    User.find_by(:id => params[:id]).destroy
+    redirect '/logout'
+  end
+  
 end
