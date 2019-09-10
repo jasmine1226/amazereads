@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   post '/register' do
     user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
     if user.save
-      redirect "/users/#{user.id}"
+      redirect "/login"
     end
     erb :'/users/failure'
   end
