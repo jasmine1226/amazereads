@@ -3,4 +3,11 @@
 <h3>rating: <%=@review.rating%></h3>
 <h3>author: <%=@review.content%></h3>
 
+<% if session[:user_id] == @review.user_id %>
+    <form action="/reviews/<%= @review.id %>/delete" method="post">
+        <input id="hidden" type="hidden" name="_method" value="delete">
+        <input type="submit" value="delete review" />
+    </form>
+<% end %>
+
 <a href="/books/<%= @book.id %>">Back to Book page</a>

@@ -15,9 +15,6 @@ class ReviewsController < ApplicationController
         @user = User.find_by_id(session[:user_id])
         @book.reviews.push(@review)
         @user.reviews.push(@review)
-        @book.save
-        @user.save
-  
         redirect "/reviews/#{@review.id}"
     end
 
@@ -34,5 +31,10 @@ class ReviewsController < ApplicationController
         erb :'/reviews/show'
     end
   
-
+    delete "/reviews/:id/delete" do
+        @review = Review.find_by(:id => params[:id])
+        @book = Book.find_by_id(@review[:book_id])
+        @review.destroy
+        redirect "/books/#{@book.id}/reviews"
+    end
   end
