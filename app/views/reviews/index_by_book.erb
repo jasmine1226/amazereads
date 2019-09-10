@@ -7,13 +7,18 @@
     <tr>        
         <th>Rating</th>
         <th>Content</th>
+        <th>Action</th>
     </tr>
         <% @reviews.each do |review| %>
             <tr>
                 <td><%=review.rating%></td>
-                <td><%=review.content%></td>      
+                <td><%=review.content%></td>  
+                <td><a href="/reviews/<%= review.id %>" class="btn btn-default">View</a></td>    
             </tr>
+            
         <% end %>
     </table>
 </div><br><br>
-<a href="/books/<%= @book.id %>" class="btn btn-default">back</a>
+<form>
+  <input type="button" value="Back" class="btn btn-default" onclick="history.back()">
+</form>
