@@ -8,6 +8,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
+    @recent_reviews = Review.all.last(3)
     erb :welcome
   end
 

@@ -13,13 +13,15 @@ class UsersController < ApplicationController
   end
 
   get "/users/:id" do
-    @user = User.find_by(:id => params[:id])
+    @user = User.find(params[:id])
+    @user.reviews.length > 3 ? (@count = 3) : (@count = @user.reviews.length)
+    @recent_reviews = @user.reviews.last(@count)
     erb :'/users/profile'
   end
 
   get "/users/:id/edit" do  
     if logged_in? && current_user.id == params[:id].to_i
-        @user = User.find_by(:id => params[:id])
+        @user = User.find(params[:id])
         erb :'/users/edit'
     else
       redirect '/error'
@@ -27,7 +29,7 @@ class UsersController < ApplicationController
   end
 
   patch "/users/:id/edit" do
-    @user = User.find_by(:id => params[:id])
+    @user = User.find(params[:id])
     @user.username = params[:username]
     @user.email = params[:email]
     @user.password = params[:password]
@@ -36,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   delete "/users/:id/delete" do
-    User.find_by(:id => params[:id]).destroy
+    User.find(params[:id]).destroy
     redirect '/logout'
   end
   

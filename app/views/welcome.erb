@@ -1,3 +1,19 @@
 <h1>amazereads</h1>
 <p>definitely not goodreads ;)</p>
 
+<h2>Latest Book Reviews</h2>
+<table class="table-hover" style="width:100%">
+    <tr>
+        <th>Book</th>
+        <th>Rating</th>
+        <th>Content</th>
+    </tr>
+    <% @recent_reviews.each do |review| %>
+        <tr>
+            <td><a href="/books/<%= review.book_id %>"><%= Book.find_by_id(review.book_id).title %></a></td>
+            <td><%=review.rating%></td>
+            <td><%=review.content%></td>
+        </tr>
+    <% end %>
+</table>
+
