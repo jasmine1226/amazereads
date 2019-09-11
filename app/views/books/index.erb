@@ -1,6 +1,9 @@
 <h1>Books</h1>
-<a href="/books/new">Create a New Nook!</a>
-<br><br>
+
+<% if logged_in? %>
+    <a href="/books/new">Create a New Nook!</a>
+    <br><br>
+<% end %>
 
 <div class="table-responsive">
     <table class="table-hover" style="width:100%">

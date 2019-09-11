@@ -6,7 +6,11 @@ class BooksController < ApplicationController
   end
 
   get '/books/new' do
-    erb :'/books/new'
+    if logged_in?
+      erb :'/books/new'
+    else
+      redirect '/login'
+    end
   end
 
   post '/books/new' do
