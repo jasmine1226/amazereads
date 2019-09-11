@@ -1,17 +1,22 @@
-<h2>Creating a Review for <%= @book.title %></h2>
+<h2>Creating a Review for 《<%= @book.title %>》</h2>
 
 <div class="form-group"> 
     <form action="/reviews/new/<%= @book.id %>" method="post">
         <p>
-            <lable for="content">Review:</label>
-            <textarea type="text" class="form-control" name="content"></textarea>
+            <fieldset class="rating">
+                <input type="radio" id="star5" name="rating" value="5" required="required"/><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                <input type="radio" id="star4" name="rating" value="4" required="required"/><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                <input type="radio" id="star3" name="rating" value="3" required="required"/><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                <input type="radio" id="star2" name="rating" value="2" required="required"/><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                <input type="radio" id="star1" name="rating" value="1" required="required"/><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+            </fieldset>
         </p>
         <p>
-            <lable for="rating">Rating:</label>
-            <input type="range" class="form-control" name="rating" min="1" max="5"/>
-        </p>
+            <lable for="content"></label>
+            <textarea type="text" class="form-control" name="content"></textarea>
+        </p>        
         <input type="submit" class="btn btn-default" value="Submit">
     </form>
 </div>
-<br><br>
+<br>
 <button class="btn btn-default" onclick="history.back()">Back</button>
