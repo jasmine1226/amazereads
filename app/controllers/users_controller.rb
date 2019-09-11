@@ -12,10 +12,17 @@ class UsersController < ApplicationController
     erb :'/users/failure'
   end
 
+  get '/users/:id/bookshelf' do
+    @user = User.find(params[:id])
+    @books = @user.books
+    erb :'/users/bookshelf'
+  end
+
   get "/users/:id" do
     @user = User.find(params[:id])
     @user.reviews.length > 3 ? (@count = 3) : (@count = @user.reviews.length)
     @recent_reviews = @user.reviews.last(@count)
+    @favorite_books = @user.books
     erb :'/users/profile'
   end
 

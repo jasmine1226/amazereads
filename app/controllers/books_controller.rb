@@ -19,8 +19,18 @@ class BooksController < ApplicationController
   end
 
   get '/books/:id' do
-    @book = Book.find_by_id(params[:id])
+    @book = Book.find(params[:id])
     erb :'/books/show'
   end
 
+  get '/books/:id/favorite' do
+    if logged_in?
+      @book = Book.find(params[:id])
+      @user = User.find(session[:user_id])
+      @user.books.push(@book)
+      erb :'/books/favorite'
+    else
+      redirect '/login'
+    end
+  end
 end

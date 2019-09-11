@@ -28,7 +28,7 @@
             <li><a href="/books">Books</a></li>
             <% if logged_in? %>
               <li><a href="/users/<%= session[:user_id] %>">My Profile</a></li>
-              <li><a href="/">My Bookshelf</a></li>
+              <li><a href="/users/<%= session[:user_id] %>/bookshelf">My Bookshelf</a></li>
               <li><a href="/users/<%= session[:user_id] %>/reviews">My Reviews</a></li>
             <% end %>
           </ul>

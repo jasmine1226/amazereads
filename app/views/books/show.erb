@@ -7,6 +7,7 @@
     <a href="/books/<%= @book.id %>/reviews" class="btn btn-default">All Reviews</a>    
     <% if logged_in? %>
         <a href="/reviews/new/<%= @book.id %>" class="btn btn-default">Add a Review</a>
+        <a href="/books/<%= @book.id %>/favorite" class="btn btn-default">Add to Favorite</a>
     <% end %>
     <a href="/books" class="btn btn-default">Back</a>
 </div>

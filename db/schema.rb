@@ -20,6 +20,11 @@ ActiveRecord::Schema.define(version: 20190911052633) do
     t.string "description"
   end
 
+  create_table "books_users", force: :cascade do |t|
+    t.integer "book_id"
+    t.integer "user_id"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.string  "title"
     t.string  "content"
@@ -32,11 +37,6 @@ ActiveRecord::Schema.define(version: 20190911052633) do
     t.string "username"
     t.string "email"
     t.string "password_digest"
-  end
-
-  create_table "users_books", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "book_id"
   end
 
 end

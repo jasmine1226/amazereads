@@ -1,0 +1,21 @@
+<h1>My Bookshelf</h1>
+
+<h2>Favorite Books</h2>
+
+<div class="table-responsive">
+    <table class="table-hover" style="width:100%">
+        <tr>
+           <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+        </tr>
+
+        <% @books.each do |book| %>
+            <tr>
+                <td><a href="/books/<%= book.id %>"><%= book.title %></a></td>
+                <td><%=book.author%></td>
+                <td><%=book.genre%></td>
+            </tr>
+        <%end%>        
+    </table>
+</div>
