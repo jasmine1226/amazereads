@@ -20,6 +20,9 @@ class BooksController < ApplicationController
 
   get '/books/:id' do
     @book = Book.find(params[:id])
+    if logged_in?
+      @user = User.find(session[:user_id])
+    end
     erb :'/books/show'
   end
 
@@ -27,10 +30,21 @@ class BooksController < ApplicationController
     if logged_in?
       @book = Book.find(params[:id])
       @user = User.find(session[:user_id])
-      @user.books.push(@book)
-      erb :'/books/favorite'
+      @user.books.push(@book) if !@user.books.exists?(:id => @book.id)
+      redirect back
     else
       redirect '/login'
     end
   end
+
+  get '/books/:id/unfavorite' do
+    if logged_in?
+      @book = Book.find(params[:id])
+      @user = User.find(session[:user_id])
+      @user.books.delete(@book)
+      redirect back
+    else
+      redirect '/login'
+    end
+  end  
 end

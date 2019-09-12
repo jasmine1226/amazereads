@@ -8,6 +8,7 @@
            <th>Title</th>
             <th>Author</th>
             <th>Genre</th>
+            <th>Action</th>
         </tr>
 
         <% @books.each do |book| %>
@@ -15,6 +16,7 @@
                 <td><a href="/books/<%= book.id %>"><%= book.title %></a></td>
                 <td><%=book.author%></td>
                 <td><%=book.genre%></td>
+                <td><a href="/books/<%= book.id %>/unfavorite" class="btn btn-default">Unfavorite</a></td>                
             </tr>
         <%end%>        
     </table>

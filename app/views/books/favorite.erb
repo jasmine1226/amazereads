@@ -1,3 +1,6 @@
 <h3>Success! The book is added to your favorite!</h3>
 
-<a href="/books" class="btn btn-default">Back</a>
+<div class="btn-group">
+    <a href="/books/<%= @book.id %>" class="btn btn-default" >Back</a>
+    <a href="/users/<%= @user.id %>/bookshelf" class="btn btn-default">Go to My Bookshelf</a>
+</div>

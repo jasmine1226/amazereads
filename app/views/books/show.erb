@@ -7,7 +7,11 @@
     <a href="/books/<%= @book.id %>/reviews" class="btn btn-default">All Reviews</a>    
     <% if logged_in? %>
         <a href="/reviews/new/<%= @book.id %>" class="btn btn-default">Add a Review</a>
-        <a href="/books/<%= @book.id %>/favorite" class="btn btn-default">Add to Favorite</a>
+        <% if !@user.books.exists?(:id => @book.id) %>
+            <a href="/books/<%= @book.id %>/favorite" class="btn btn-default" >Favorite </a>
+        <% else %>
+            <a href="/books/<%= @book.id %>/unfavorite" class="btn btn-default" >Unfavorite </a>
+        <% end %>            
     <% end %>
     <a href="/books" class="btn btn-default">Back</a>
 </div>
