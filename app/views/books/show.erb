@@ -6,7 +6,14 @@
 <div class="btn-group">
     <a href="/books/<%= @book.id %>/reviews" class="btn btn-default">All Reviews</a>    
     <% if logged_in? %>
-        <a href="/reviews/new/<%= @book.id %>" class="btn btn-default">Add a Review</a>
+        <% if !@user.reviews.exists?(:book_id => @book.id) %>
+            <a href="/reviews/new/<%= @book.id %>" class="btn btn-default">Add a Review</a>
+        <% else %>
+            <a href="/reviews/<%= @review.id %>/edit" class="btn btn-default">Update Your Review</a>
+        <% end %>
+
+       
+
         <% if !@user.books.exists?(:id => @book.id) %>
             <a href="/books/<%= @book.id %>/favorite" class="btn btn-default" >Favorite </a>
         <% else %>

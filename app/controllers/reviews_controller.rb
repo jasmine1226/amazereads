@@ -3,6 +3,10 @@ class ReviewsController < ApplicationController
     get "/reviews/new/:id" do
         if logged_in?
             @book = Book.find_by_id(params[:id])
+            if Review.exists?(condition={:book_id => @book.id, :user_id => session[:user_id]})
+                @review = Review.find_by(:book_id => @book.id, :user_id => session[:user_id])
+                redirect "/reviews/#{@review.id}>/edit"
+            end
             erb :'reviews/new'
         else
             redirect '/error'

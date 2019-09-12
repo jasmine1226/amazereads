@@ -22,6 +22,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     if logged_in?
       @user = User.find(session[:user_id])
+      @review = Review.find_by(:book_id => @book.id, :user_id => session[:user_id])
     end
     erb :'/books/show'
   end
