@@ -42,6 +42,10 @@ class ApplicationController < Sinatra::Base
     redirect back
   end
 
+  get '/error' do
+    erb :error
+  end
+
   helpers do
     def logged_in?
        !!current_user

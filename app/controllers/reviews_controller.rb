@@ -28,7 +28,7 @@ class ReviewsController < ApplicationController
         end
     end
 
-    patch "/reviews/:id/edit" do
+    patch "/reviews/:id" do
         @review = Review.find(params[:id])        
         @review.content = params[:content]
         @review.rating = params[:rating]
@@ -51,15 +51,18 @@ class ReviewsController < ApplicationController
     get "/reviews/:id" do
         @review = Review.find(params[:id])
         @book = Book.find(@review.book_id)
+        if logged_in?
+            @user = User.find(session[:user_id])
+        end
         erb :'/reviews/show'
     end
   
-    delete "/reviews/:id/delete" do
+    delete "/reviews/:id" do
         @review = Review.find(params[:id])
         if logged_in? && session[:user_id] == @review.user_id
             @book = Book.find_by_id(@review[:book_id])
             @review.destroy
-            redirect "/books/#{@book.id}/reviews"
+            redirect back
         else
             redirect '/error'
         end

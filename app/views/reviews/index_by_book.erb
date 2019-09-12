@@ -1,4 +1,4 @@
-<h1>Reviews of <%= @book.title %></h1>
+<h1>Reviews of <a href="/books/<%= @book.id %>"><%= @book.title %></a></h1>
 <b><p>by <%=@book.author%></p></b>
 
 <br><br>
@@ -18,5 +18,6 @@
             
         <% end %>
     </table>
-</div><br><br>
+</div>
+<br><br>
 <button class="btn btn-default" onclick="history.back()">Back</button>
