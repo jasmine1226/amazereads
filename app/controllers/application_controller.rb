@@ -1,4 +1,5 @@
 class ApplicationController < Sinatra::Base
+  register Sinatra::Flash
 
   configure do
     set :public_folder, 'public'
@@ -22,7 +23,7 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = @user.id
       redirect "/users/#{@user.id}"
     else
-      redirect '/failure'
+      redirect '/login_failure'
     end
   end
 
@@ -31,12 +32,14 @@ class ApplicationController < Sinatra::Base
     redirect '/'
   end
 
-  get '/failure' do
-    erb :failure
+  get '/registration_failure' do
+    flash[:warning] = "Uh-oh! The username or email has been taken. Try a different one."
+    redirect back
   end
 
-  get '/error' do
-    erb :error
+  get '/login_failure' do
+    flash[:warning] = "Uh-oh! Your username or password may be incorrect."
+    redirect back
   end
 
   helpers do

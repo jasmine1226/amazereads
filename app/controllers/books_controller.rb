@@ -9,7 +9,7 @@ class BooksController < ApplicationController
     if logged_in?
       erb :'/books/new'
     else
-      redirect '/login'
+      redirect '/error'
     end
   end
 
@@ -33,7 +33,7 @@ class BooksController < ApplicationController
       @user.books.push(@book) if !@user.books.exists?(:id => @book.id)
       redirect back
     else
-      redirect '/login'
+      redirect '/error'
     end
   end
 
@@ -44,7 +44,7 @@ class BooksController < ApplicationController
       @user.books.delete(@book)
       redirect back
     else
-      redirect '/login'
+      redirect '/error'
     end
   end  
 end

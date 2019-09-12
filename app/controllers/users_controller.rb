@@ -7,9 +7,9 @@ class UsersController < ApplicationController
   post '/users/new' do
     user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
     if user.save
-      redirect "/login"
+      redirect '/login'
     end
-    erb :'/users/failure'
+    redirect '/registration_failure'
   end
 
   get '/users/:id/bookshelf' do
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     erb :'/users/bookshelf'
   end
 
-  get "/users/:id" do
+  get '/users/:id' do
     @user = User.find(params[:id])
     @user.reviews.length > 3 ? (@count = 3) : (@count = @user.reviews.length)
     @recent_reviews = @user.reviews.last(@count)
@@ -26,16 +26,16 @@ class UsersController < ApplicationController
     erb :'/users/profile'
   end
 
-  get "/users/:id/edit" do  
+  get '/users/:id/edit' do  
     if logged_in? && current_user.id == params[:id].to_i
         @user = User.find(params[:id])
         erb :'/users/edit'
     else
-      redirect '/error'
+      redirect '/access_failure'
     end
   end
 
-  patch "/users/:id/edit" do
+  patch '/users/:id/edit' do
     @user = User.find(params[:id])
     @user.username = params[:username]
     @user.email = params[:email]
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     erb :'/users/profile'
   end
 
-  delete "/users/:id/delete" do
+  delete '/users/:id/delete' do
     User.find(params[:id]).destroy
     redirect '/logout'
   end

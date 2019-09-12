@@ -34,7 +34,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if !logged_in? %>
-              <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+              <li><a href="/users/new"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
               <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
             <% else %>
               <li><a href="/users/<%= session[:user_id] %>/edit"><span class="glyphicon glyphicon-pencil"></span>Account</a></li>
@@ -43,6 +43,13 @@
           </ul>
         </div>
       </nav>
+      
+      <% flash.keys.each do |type| %>
+        <div data-alert class="flash <%= type %> alert-box radius">
+          <%= flash[type] %>
+          <a href="#" class="close">&times;</a>
+        </div>
+      <% end %>
 
       <%= yield %>
 
