@@ -33,7 +33,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/registration_failure' do
-    flash[:warning] = "Uh-oh! The username or email has been taken. Try a different one."
+    flash[:warning] = "Uh-oh! The username or email has been taken, or the email you entered is not valid. Try again!"
     redirect back
   end
 
