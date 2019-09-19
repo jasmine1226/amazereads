@@ -23,26 +23,16 @@ class BooksController < ApplicationController
     if logged_in?
       @user = User.find(session[:user_id])
       @review = Review.find_by(:book_id => @book.id, :user_id => session[:user_id])
+      @book_manager = BookManager.find_by(:book_id => @book.id, :user_id => session[:user_id])
     end
     erb :'/books/show'
   end
 
-  get '/books/:id/favorite' do
-    if logged_in?
-      @book = Book.find(params[:id])
-      @user = User.find(session[:user_id])
-      @user.books.push(@book) if !@user.books.exists?(:id => @book.id)
-      redirect back
-    else
-      redirect '/error'
-    end
-  end
-
-  get '/books/:id/unfavorite' do
-    if logged_in?
-      @book = Book.find(params[:id])
-      @user = User.find(session[:user_id])
-      @user.books.delete(@book)
+  patch '/books/:id/favorite' do
+    if logged_in?      
+      book_manager = BookManager.find_or_create_by(user_id: session[:user_id], book_id: params[:id])
+      book_manager[:favorited?] = !book_manager[:favorited?]
+      book_manager.save
       redirect back
     else
       redirect '/error'

@@ -14,7 +14,9 @@ class UsersController < ApplicationController
 
   get '/users/:id/bookshelf' do
     @user = User.find(params[:id])
-    @books = @user.books
+    fav_book_ids = BookManager.find_by(user_id: @user.id, favorited?: true).book_ids
+    @favorite_books = Book.find(fav_book_ids)
+    
     erb :'/users/bookshelf'
   end
 
