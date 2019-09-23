@@ -31,21 +31,15 @@ class BooksController < ApplicationController
     if logged_in?
       @book = Book.find(params[:id])
       @user = User.find(session[:user_id])
-      @user.books.push(@book) if !@user.books.exists?(:id => @book.id)
+      if !@user.books.exists?(:id => @book.id)
+         @user.books.push(@book)
+      else
+        @user.books.delete(@book)
+      end
       redirect back
     else
       redirect '/error'
     end
   end
 
-  get '/books/:id/unfavorite' do
-    if logged_in?
-      @book = Book.find(params[:id])
-      @user = User.find(session[:user_id])
-      @user.books.delete(@book)
-      redirect back
-    else
-      redirect '/error'
-    end
-  end  
 end
