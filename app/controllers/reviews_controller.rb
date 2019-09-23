@@ -23,11 +23,12 @@ class ReviewsController < ApplicationController
     end
 
     get "/reviews/:id/edit" do
-        @review = Review.find(params[:id])
+        @review = set_review(params[:id])
+        
         if logged_in? && session[:user_id] == @review.user_id
             @book = Book.find(@review.book_id)
             erb :'/reviews/edit'
-        else
+        else               
             redirect '/error'
         end
     end
@@ -62,7 +63,6 @@ class ReviewsController < ApplicationController
     end
   
     delete "/reviews/:id" do
-        @review = Review.find(params[:id])
         if logged_in? && session[:user_id] == @review.user_id
             @book = Book.find_by_id(@review[:book_id])
             @review.destroy
@@ -70,5 +70,13 @@ class ReviewsController < ApplicationController
         else
             redirect '/error'
         end
+    end
+
+    def set_review(id)
+        @review = Review.find_by_id(id)
+        if !@review
+            redirect '/error'
+        end
+        @review
     end
   end

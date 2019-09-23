@@ -31,7 +31,7 @@ class UsersController < ApplicationController
         @user = User.find(params[:id])
         erb :'/users/edit'
     else
-      redirect '/access_failure'
+      redirect '/error'
     end
   end
 
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
     @user.email = params[:email]
     @user.password = params[:password]
     @user.save
-    erb :'/users/profile'
+    redirect "/users/#{@user.id}"
   end
 
   delete '/users/:id/delete' do
