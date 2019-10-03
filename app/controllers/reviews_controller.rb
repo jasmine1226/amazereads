@@ -66,7 +66,7 @@ class ReviewsController < ApplicationController
         if logged_in? && session[:user_id] == @review.user_id
             @book = Book.find_by_id(@review[:book_id])
             @review.destroy
-            redirect "/books/#{@book.id}/reviews"
+            redirect "/users/#{session[:user_id]}/reviews"
         else
             redirect '/error'
         end
